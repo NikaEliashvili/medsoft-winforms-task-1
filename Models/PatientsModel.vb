@@ -3,6 +3,7 @@
     Public Property FullName As String = ""
     Public Property Dob As Date
     Public Property GenderID As Integer
+    Public Property Gender As String = ""
     Public Property Phone As String = ""
     Public Property Address As String = ""
     Public Property IsDelete As Boolean = False

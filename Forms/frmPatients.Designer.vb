@@ -22,91 +22,38 @@ Partial Class frmPatients
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.btnEdit = New DevExpress.XtraEditors.SimpleButton()
-        Me.btnAdd = New DevExpress.XtraEditors.SimpleButton()
-        Me.btnDelete = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.gcPatients = New DevExpress.XtraGrid.GridControl()
+        Me.gvPatients = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.colID = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colFullName = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colDob = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colGender = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colPhone = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colAddress = New DevExpress.XtraGrid.Columns.GridColumn()
-        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl1.SuspendLayout()
-        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tsMenu = New System.Windows.Forms.ToolStrip()
+        Me.tsBtnAdd = New System.Windows.Forms.ToolStripButton()
+        Me.tsBtnEdit = New System.Windows.Forms.ToolStripButton()
+        Me.tsBtnDelete = New System.Windows.Forms.ToolStripButton()
+        CType(Me.gcPatients, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.gvPatients, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tsMenu.SuspendLayout()
         Me.SuspendLayout()
         '
-        'PanelControl1
+        'gcPatients
         '
-        Me.PanelControl1.Controls.Add(Me.btnEdit)
-        Me.PanelControl1.Controls.Add(Me.btnAdd)
-        Me.PanelControl1.Controls.Add(Me.btnDelete)
-        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
-        Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(1181, 68)
-        Me.PanelControl1.TabIndex = 0
+        Me.gcPatients.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gcPatients.Location = New System.Drawing.Point(0, 45)
+        Me.gcPatients.MainView = Me.gvPatients
+        Me.gcPatients.Name = "gcPatients"
+        Me.gcPatients.Size = New System.Drawing.Size(1181, 611)
+        Me.gcPatients.TabIndex = 1
+        Me.gcPatients.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gvPatients})
         '
-        'btnEdit
+        'gvPatients
         '
-        Me.btnEdit.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEdit.Appearance.Options.UseFont = True
-        Me.btnEdit.ImageOptions.Image = Global.patients_crud_app.My.Resources.Resources.edit
-        Me.btnEdit.Location = New System.Drawing.Point(139, 0)
-        Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(181, 68)
-        Me.btnEdit.TabIndex = 1
-        Me.btnEdit.Text = "რედაქტირება"
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.Appearance.Options.UseFont = True
-        Me.btnAdd.ImageOptions.Image = Global.patients_crud_app.My.Resources.Resources.add
-        Me.btnAdd.Location = New System.Drawing.Point(0, 0)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(143, 68)
-        Me.btnAdd.TabIndex = 0
-        Me.btnAdd.Text = "დამატება"
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Appearance.BackColor = System.Drawing.Color.Transparent
-        Me.btnDelete.Appearance.BackColor2 = System.Drawing.Color.Transparent
-        Me.btnDelete.Appearance.BorderColor = System.Drawing.Color.Transparent
-        Me.btnDelete.Appearance.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDelete.Appearance.ForeColor = System.Drawing.Color.Black
-        Me.btnDelete.Appearance.Options.UseBackColor = True
-        Me.btnDelete.Appearance.Options.UseBorderColor = True
-        Me.btnDelete.Appearance.Options.UseFont = True
-        Me.btnDelete.Appearance.Options.UseForeColor = True
-        Me.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnDelete.ImageOptions.Image = Global.patients_crud_app.My.Resources.Resources.delete
-        Me.btnDelete.Location = New System.Drawing.Point(320, 0)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(122, 68)
-        Me.btnDelete.TabIndex = 2
-        Me.btnDelete.Text = "წაშლა"
-        '
-        'GridControl1
-        '
-        Me.GridControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GridControl1.Location = New System.Drawing.Point(0, 68)
-        Me.GridControl1.MainView = Me.GridView1
-        Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(1181, 588)
-        Me.GridControl1.TabIndex = 1
-        Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
-        '
-        'GridView1
-        '
-        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.colID, Me.colFullName, Me.colDob, Me.colGender, Me.colPhone, Me.colAddress})
-        Me.GridView1.GridControl = Me.GridControl1
-        Me.GridView1.Name = "GridView1"
+        Me.gvPatients.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.colID, Me.colFullName, Me.colDob, Me.colGender, Me.colPhone, Me.colAddress})
+        Me.gvPatients.GridControl = Me.gcPatients
+        Me.gvPatients.Name = "gvPatients"
         '
         'colID
         '
@@ -120,7 +67,7 @@ Partial Class frmPatients
         '
         'colFullName
         '
-        Me.colFullName.Caption = "პაციენტის გვარი, სახელი"
+        Me.colFullName.Caption = "პაციენტის გვარი სახელი"
         Me.colFullName.FieldName = "FullName"
         Me.colFullName.MinWidth = 30
         Me.colFullName.Name = "colFullName"
@@ -168,33 +115,67 @@ Partial Class frmPatients
         Me.colAddress.VisibleIndex = 5
         Me.colAddress.Width = 112
         '
-        'Form1
+        'tsMenu
+        '
+        Me.tsMenu.ImageScalingSize = New System.Drawing.Size(36, 36)
+        Me.tsMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsBtnAdd, Me.tsBtnEdit, Me.tsBtnDelete})
+        Me.tsMenu.Location = New System.Drawing.Point(0, 0)
+        Me.tsMenu.Name = "tsMenu"
+        Me.tsMenu.Size = New System.Drawing.Size(1181, 45)
+        Me.tsMenu.TabIndex = 2
+        Me.tsMenu.Text = "ToolStrip1"
+        '
+        'tsBtnAdd
+        '
+        Me.tsBtnAdd.Image = Global.patients_crud_app.My.Resources.Resources.add
+        Me.tsBtnAdd.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsBtnAdd.Name = "tsBtnAdd"
+        Me.tsBtnAdd.Size = New System.Drawing.Size(140, 40)
+        Me.tsBtnAdd.Text = "დამატება"
+        '
+        'tsBtnEdit
+        '
+        Me.tsBtnEdit.Image = Global.patients_crud_app.My.Resources.Resources.edit
+        Me.tsBtnEdit.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsBtnEdit.Name = "tsBtnEdit"
+        Me.tsBtnEdit.Size = New System.Drawing.Size(180, 40)
+        Me.tsBtnEdit.Text = "რედაქტირება"
+        '
+        'tsBtnDelete
+        '
+        Me.tsBtnDelete.Image = Global.patients_crud_app.My.Resources.Resources.delete
+        Me.tsBtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsBtnDelete.Name = "tsBtnDelete"
+        Me.tsBtnDelete.Size = New System.Drawing.Size(112, 40)
+        Me.tsBtnDelete.Text = "წაშლა"
+        '
+        'frmPatients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1181, 656)
-        Me.Controls.Add(Me.GridControl1)
-        Me.Controls.Add(Me.PanelControl1)
-        Me.Name = "Form1"
+        Me.Controls.Add(Me.gcPatients)
+        Me.Controls.Add(Me.tsMenu)
+        Me.Name = "frmPatients"
         Me.Text = "Form1"
-        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl1.ResumeLayout(False)
-        CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.gcPatients, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.gvPatients, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tsMenu.ResumeLayout(False)
+        Me.tsMenu.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
-    Friend WithEvents btnAdd As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents btnDelete As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents btnEdit As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents GridControl1 As DevExpress.XtraGrid.GridControl
-    Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents gcPatients As DevExpress.XtraGrid.GridControl
+    Friend WithEvents gvPatients As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents colID As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents colFullName As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents colDob As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents colGender As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents colPhone As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents colAddress As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents tsMenu As ToolStrip
+    Friend WithEvents tsBtnAdd As ToolStripButton
+    Friend WithEvents tsBtnEdit As ToolStripButton
+    Friend WithEvents tsBtnDelete As ToolStripButton
 End Class
