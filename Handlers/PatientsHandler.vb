@@ -19,8 +19,8 @@ Public Class PatientsHandler
                 model.Dob = Convert.ToDateTime(dt.Rows(0)("Dob"))
                 model.GenderID = CInt(dt.Rows(0)("GenderID"))
                 model.Gender = dt.Rows(0)("Gender")
-                model.Phone = dt.Rows(0)("Phone")
-                model.Address = dt.Rows(0)("Address")
+                model.Phone = dt.Rows(0)("Phone").ToString()
+                model.Address = dt.Rows(0)("Address").ToString()
             End If
 
         Catch ex As Exception
@@ -45,7 +45,7 @@ Public Class PatientsHandler
         Return dt
     End Function
 
-    Protected Friend Function SavePatient(PatientID As Integer, FullName As String, Dob As DateTime, GenderID As Integer, Phone As String, Address As String) As Integer
+    Public Function SavePatient(PatientID As Integer, FullName As String, Dob As DateTime, GenderID As Integer, Phone As String, Address As String) As Integer
         Dim updatedPatientID As Integer
         Try
             Using conn As SqlConnection = Database.GetConnectionString()
@@ -70,6 +70,27 @@ Public Class PatientsHandler
             Throw New Exception($"პაციენტის მონაცემების შენახვა ვერ მოხერხდა. ერორი: {ex.Message}")
         End Try
         Return updatedPatientID
+    End Function
+
+    Public Function DeletePatients(PatientsIDList As DataTable) As Integer
+        If PatientsIDList Is Nothing OrElse PatientsIDList.Rows.Count = 0 Then Return 0
+        Dim DeletedRows As Integer = 0
+
+        Try
+            Using Sc As New SqlCommand("dbo.PatientDelete", Database.GetConnectionString())
+                Sc.CommandType = CommandType.StoredProcedure
+                Sc.Parameters.AddWithValue("@PatientsIDList", PatientsIDList)
+                Sc.Parameters("@PatientsIDList").TypeName = "dbo.PatientsIDList"
+
+                If Sc.Connection.State = ConnectionState.Closed Then Sc.Connection.Open()
+                DeletedRows = Sc.ExecuteNonQuery()
+
+            End Using
+        Catch ex As Exception
+            MessageBox.Show($"წაშლა ვერ მოხერხდა. ერორი: {ex.Message}", "დაფიქსირდა შეცდომა", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Throw New Exception($"წაშლა ვერ მოხერხდა. ერორი: {ex.Message}")
+        End Try
+        Return DeletedRows
     End Function
 
 
