@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsReports" targetNamespace="http://tempuri.org/dsReports.xsd" xmlns:mstns="http://tempuri.org/dsReports.xsd" xmlns="http://tempuri.org/dsReports.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsReports" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="dsReports" msprop:Generator_DataSetName="dsReports">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dtPatients" msprop:Generator_RowEvHandlerName="dtPatientsRowChangeEventHandler" msprop:Generator_RowDeletedName="dtPatientsRowDeleted" msprop:Generator_RowDeletingName="dtPatientsRowDeleting" msprop:Generator_RowEvArgName="dtPatientsRowChangeEvent" msprop:Generator_TablePropName="dtPatients" msprop:Generator_RowChangedName="dtPatientsRowChanged" msprop:Generator_RowChangingName="dtPatientsRowChanging" msprop:Generator_TableClassName="dtPatientsDataTable" msprop:Generator_RowClassName="dtPatientsRow" msprop:Generator_TableVarName="tabledtPatients" msprop:Generator_UserTableName="dtPatients">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_UserColumnName="ID" type="xs:int" minOccurs="0" />
+              <xs:element name="FullName" msdata:Caption="პაციენტის გვარი, სახელი" msprop:Generator_ColumnPropNameInRow="FullName" msprop:Generator_ColumnPropNameInTable="FullNameColumn" msprop:Generator_ColumnVarNameInTable="columnFullName" msprop:Generator_UserColumnName="FullName" type="xs:string" minOccurs="0" />
+              <xs:element name="PersonalNumber" msdata:Caption="პირადი ნომერი" msprop:Generator_ColumnPropNameInRow="PersonalNumber" msprop:Generator_ColumnPropNameInTable="PersonalNumberColumn" msprop:Generator_ColumnVarNameInTable="columnPersonalNumber" msprop:Generator_UserColumnName="PersonalNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="Email" msdata:Caption="ელ. ფოსტა" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_ColumnPropNameInTable="EmailColumn" msprop:Generator_ColumnVarNameInTable="columnEmail" msprop:Generator_UserColumnName="Email" type="xs:string" minOccurs="0" />
+              <xs:element name="Dob" msdata:Caption="დაბ. თარიღი" msprop:Generator_ColumnPropNameInRow="Dob" msprop:Generator_ColumnPropNameInTable="DobColumn" msprop:Generator_ColumnVarNameInTable="columnDob" msprop:Generator_UserColumnName="Dob" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Gender" msdata:Caption="სქესი" msprop:Generator_ColumnPropNameInRow="Gender" msprop:Generator_ColumnPropNameInTable="GenderColumn" msprop:Generator_ColumnVarNameInTable="columnGender" msprop:Generator_UserColumnName="Gender" type="xs:string" minOccurs="0" />
+              <xs:element name="Phone" msdata:Caption="მობ. ნომერი" msprop:Generator_ColumnPropNameInRow="Phone" msprop:Generator_ColumnPropNameInTable="PhoneColumn" msprop:Generator_ColumnVarNameInTable="columnPhone" msprop:Generator_UserColumnName="Phone" type="xs:string" minOccurs="0" />
+              <xs:element name="Address" msdata:Caption="მისამართი" msprop:Generator_ColumnPropNameInRow="Address" msprop:Generator_ColumnPropNameInTable="AddressColumn" msprop:Generator_ColumnVarNameInTable="columnAddress" msprop:Generator_UserColumnName="Address" type="xs:string" minOccurs="0" />
+              <xs:element name="IsActive" msdata:Caption="აქტიური" msprop:Generator_ColumnPropNameInRow="IsActive" msprop:Generator_ColumnPropNameInTable="IsActiveColumn" msprop:Generator_ColumnVarNameInTable="columnIsActive" msprop:Generator_UserColumnName="IsActive" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,4 +1,6 @@
-﻿Public Class frmPatientAddEdit
+﻿Imports System.Text.RegularExpressions
+
+Public Class frmPatientAddEdit
     Private handler As New PatientsHandler()
     Private currentPatientID As Integer = 0
 
@@ -10,24 +12,36 @@
     End Sub
 
     Private Sub frmPatientAddEdit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "პაციენტის დამატება"
         handler.GetGenders(cbGender)
         Dim PatientData As New PatientsModel
         If currentPatientID > 0 Then
             Me.Text = "პაციენტის რედაქტირება"
             PatientData = handler.GetPatientByID(currentPatientID)
-            LastName() = PatientData.FullName.Split(" ")(0)
-            FirstName() = PatientData.FullName.Split(" ")(1)
-            Dob() = PatientData.Dob
-            GenderID() = PatientData.GenderID
-            Phone() = PatientData.Phone
-            Address() = PatientData.Address
+            LastName = PatientData.FullName.Split(" ")(0)
+            FirstName = PatientData.FullName.Split(" ")(1)
+            PersonalNumber = PatientData.PersonalNumber
+            Email = PatientData.Email
+            Dob = PatientData.Dob
+            GenderID = PatientData.GenderID
+            Phone = PatientData.Phone
+            Address = PatientData.Address
+            IsActive = PatientData.IsActive
+        Else
+            Me.Text = "პაციენტის დამატება"
+            LastName = ""
+            FirstName = ""
+            PersonalNumber = ""
+            Email = ""
+            GenderID = 1
+            Phone = ""
+            Address = ""
+            IsActive = True
         End If
 
     End Sub
 
 #Region "Properties"
-    Public Property FirstName() As String
+    Public Property FirstName As String
         Get
             Return txtFirstName.Text.Trim()
         End Get
@@ -36,7 +50,7 @@
         End Set
     End Property
 
-    Public Property LastName() As String
+    Public Property LastName As String
         Get
             Return txtLastName.Text.Trim()
         End Get
@@ -44,14 +58,31 @@
             txtLastName.Text = value.Trim()
         End Set
     End Property
-
-    Public ReadOnly Property FullName() As String
+    Public ReadOnly Property FullName As String
         Get
-            Return $"{LastName()} {FirstName()}"
+            Return $"{LastName} {FirstName}"
         End Get
     End Property
 
-    Public Property Dob() As DateTime
+    Public Property PersonalNumber As String
+        Get
+            Return txtPersonalNumber.Text.Trim()
+        End Get
+        Set(value As String)
+            txtPersonalNumber.Text = value.Trim()
+    End Set
+    End Property
+    Public Property Email As String
+        Get
+            Return txtEmail.Text.Trim()
+        End Get
+        Set(value As String)
+            txtEmail.Text = value.Trim()
+        End Set
+    End Property
+
+
+    Public Property Dob As DateTime
         Get
             Return dpDob.Value
         End Get
@@ -60,7 +91,7 @@
         End Set
     End Property
 
-    Public Property GenderID() As Integer
+    Public Property GenderID As Integer
         Get
             Return cbGender.SelectedValue
         End Get
@@ -69,7 +100,7 @@
         End Set
     End Property
 
-    Public Property Phone() As String
+    Public Property Phone As String
         Get
             Return txtPhone.Text.Trim()
         End Get
@@ -82,15 +113,39 @@
         End Set
     End Property
 
-    Public Property Address() As String
+    Public Property Address As String
         Get
-            Return txtAddress.Text
+            Return txtAddress.Text.Trim()
         End Get
         Set(value As String)
-            txtAddress.Text = value
+            txtAddress.Text = value.Trim()
+        End Set
+    End Property
+    Public Property IsActive As Boolean
+        Get
+            Return cbStatus.Checked
+        End Get
+        Set(value As Boolean)
+            cbStatus.Checked = value
         End Set
     End Property
 #End Region
+
+    ''' <summary>
+    ''' ამოწმებს ელ. ფოსტის ვალიდურობას RegEx-ის პატერნით.
+    ''' </summary>
+    ''' <param name="email"></param>
+    ''' <returns>აბსუნებს Boolean-ს. თუ ვალიდურია => True, თუ არ არის => False</returns>
+    Private Function IsEmailValid(email As String) As Boolean
+        If String.IsNullOrWhiteSpace(email) Then
+            Return True
+        End If
+
+        Dim emailPattern As String = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+
+        Return Regex.IsMatch(email, emailPattern)
+
+    End Function
 
 
     Public Function hasValidationErrors() As Boolean
@@ -115,7 +170,22 @@
             Return True
         End If
 
-        'ვამოწმებთ მობ. ნომერს. თუ ნომერი მითითებულია, ვამოწმებთ მის ფორმატირების წესს. 
+        'ვამოწმებთ პირ. ნომერს თუ მითითებულია (არა სავალდებულო ველი), ვამოწმებთ პირადი ნომრის სიგრძეს (11 სიმბ.).
+        If Not String.IsNullOrWhiteSpace(PersonalNumber) Then
+            If PersonalNumber.Length <> 11 Then
+                MessageBox.Show("პირ. ნომერი უნდა შეიცავდეს 11 ციფრს.", "ვალიდაციის ერორი!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return True
+            End If
+        End If
+
+        'ვამოწმებთ ელ. ფოსტას თუ მითითებულია (არა სავალდებულო ველი), ვამოწმებთ ელ. ფოსტის პატერნს.
+        If Not IsEmailValid(Email) Then
+            MessageBox.Show("გთხოვთ მიუთითოთ სწორი ელ. ფოსტა.", "ვალიდაციის ერორი!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return True
+        End If
+
+
+        'ვამოწმებთ მობ. ნომერს. თუ ნომერი მითითებულია (არა სავალდებულო ველი), ვამოწმებთ მის ფორმატირების წესს. 
         If Not String.IsNullOrWhiteSpace(Phone) Then
             If Not Phone.StartsWith("5") Then
                 MessageBox.Show("მობ. ნომერი უნდა იწყებოდეს 5-ით.", "ვალიდაციის ერორი!", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -144,8 +214,21 @@
         If hasValidationErrors() Then
             Return
         End If
+        Dim patientObj As New PatientsModel()
 
-        Dim savedItemID As Integer = handler.SavePatient(currentPatientID, FullName(), Dob(), GenderID(), Phone(), Address())
+        patientObj.ID = currentPatientID
+        patientObj.FullName = FullName
+        patientObj.PersonalNumber = PersonalNumber
+        patientObj.Email = Email
+        patientObj.Dob = Dob
+        patientObj.GenderID = GenderID
+        patientObj.Phone = Phone
+        patientObj.Address = Address
+        patientObj.IsActive = IsActive
+
+
+
+        Dim savedItemID As Integer = handler.SavePatient(patientObj)
 
         If savedItemID > 0 Then
             If currentPatientID > 0 Then

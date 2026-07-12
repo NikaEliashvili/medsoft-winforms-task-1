@@ -1,10 +1,14 @@
 ﻿Imports System.Data.SqlClient
 
 Public Class PatientsHandler
-
+    ''' <summary>
+    ''' ეძებს პაციენტს ID-ის მიხედვით და აბრუნებს კონკრეტული პაციენტის მონაცამებს. 
+    ''' </summary>
+    ''' <param name="PatientID"></param>
+    ''' <returns>აბრუნებს შესაბამისი პაციენტის მონაცემებს.</returns>
     Public Function GetPatientByID(PatientID As Integer) As PatientsModel
         Dim dt As New DataTable()
-        Dim model As New PatientsModel
+        Dim patientModel As New PatientsModel
 
         Try
             Using Sa As New SqlDataAdapter("dbo.PatientGet", Database.GetConnectionString())
@@ -14,29 +18,46 @@ Public Class PatientsHandler
             End Using
 
             If dt.Rows.Count > 0 Then
-                model.ID = CInt(dt.Rows(0)("ID"))
-                model.FullName = dt.Rows(0)("FullName")
-                model.Dob = Convert.ToDateTime(dt.Rows(0)("Dob"))
-                model.GenderID = CInt(dt.Rows(0)("GenderID"))
-                model.Gender = dt.Rows(0)("Gender")
-                model.Phone = dt.Rows(0)("Phone").ToString()
-                model.Address = dt.Rows(0)("Address").ToString()
+                patientModel.ID = CInt(dt.Rows(0)("ID"))
+                patientModel.FullName = dt.Rows(0)("FullName")
+                patientModel.Dob = Convert.ToDateTime(dt.Rows(0)("Dob"))
+                patientModel.GenderID = CInt(dt.Rows(0)("GenderID"))
+                patientModel.Gender = dt.Rows(0)("Gender")
+                patientModel.Phone = dt.Rows(0)("Phone").ToString()
+                patientModel.Address = dt.Rows(0)("Address").ToString()
+                patientModel.Email = dt.Rows(0)("Email").ToString()
+                patientModel.PersonalNumber = dt.Rows(0)("PersonalNumber").ToString()
+                patientModel.IsActive = dt.Rows(0)("IsActive")
             End If
 
         Catch ex As Exception
             MessageBox.Show($"პაციენტის მონაცემების ვერ ჩაიტვირთა. ერორი: {ex.Message}", "დაფიქსირდა შეცდომა", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
 
-        Return model
+        Return patientModel
     End Function
 
-
-    Public Function GetPatientsList() As DataTable
+    ''' <summary>
+    ''' ეძებს პაციენტებს შესაბამისი პარამეტრების მიხედვით. 
+    ''' </summary>
+    ''' <param name="ID">პაციენტის ID</param>
+    ''' <param name="FullName">პაციენტის გვარი სახელი</param>
+    ''' <param name="PersonalNumber">პაციენტის პირადი ნომერი</param>
+    ''' <param name="Email">პაციენტის ელ. ფოსტა</param>
+    ''' <param name="IsActive">არის თუ არა პაციენტი აქტიური (True/False)</param>
+    ''' <returns>აბრუნებს მოძებნილ პაციენტებს.</returns>
+    Public Function GetPatientsList(ID As Integer, FullName As String, PersonalNumber As String, Email As String, IsActive As Integer, Optional Top_50 As Boolean? = Nothing) As DataTable
         Dim dt As New DataTable()
 
         Try
             Using Sa As New SqlDataAdapter("dbo.PatientListGet", Database.GetConnectionString())
                 Sa.SelectCommand.CommandType = CommandType.StoredProcedure
+                Sa.SelectCommand.Parameters.AddWithValue("@ID", ID)
+                Sa.SelectCommand.Parameters.AddWithValue("@FullName", If(String.IsNullOrWhiteSpace(FullName), "", FullName))
+                Sa.SelectCommand.Parameters.AddWithValue("@PersonalNumber", If(String.IsNullOrWhiteSpace(PersonalNumber), "", PersonalNumber))
+                Sa.SelectCommand.Parameters.AddWithValue("@Email", If(String.IsNullOrWhiteSpace(Email), "", Email))
+                Sa.SelectCommand.Parameters.AddWithValue("@IsActive", IsActive)
+                Sa.SelectCommand.Parameters.AddWithValue("@TOP_50", If(Top_50.HasValue, Top_50, DBNull.Value))
                 Sa.Fill(dt)
             End Using
         Catch ex As Exception
@@ -45,25 +66,51 @@ Public Class PatientsHandler
         Return dt
     End Function
 
-    Public Function SavePatient(PatientID As Integer, FullName As String, Dob As DateTime, GenderID As Integer, Phone As String, Address As String) As Integer
+    ''' <summary>
+    ''' პაციენტების ID-ების მიხედვით ეძებს კონკრეტულ ჩანაწერებს.
+    ''' </summary>
+    ''' <param name="idsList">ID-ების ლისტი (DateTable)</param>
+    ''' <returns>აბრუნებს მოძებნილი პაციენტების ცხრილს (DateTable)</returns>
+    Public Function GetPatientsListByIds(idsList As DataTable) As dsPatientsReport
+        Dim ds As New dsPatientsReport()
+        Try
+            Using Sa As New SqlDataAdapter("dbo.PatientsListGetByIdsReport", Database.GetConnectionString())
+                Sa.SelectCommand.CommandType = CommandType.StoredProcedure
+                Sa.SelectCommand.Parameters.AddWithValue("@IdsList", idsList)
+                Sa.Fill(ds.dtPatients)
+            End Using
+        Catch ex As Exception
+            MessageBox.Show($"პაციენტები ვერ ჩაიტვირთა. ერორი: {ex.Message}", "დაფიქსირდა შეცდომა", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+        Return ds
+    End Function
+
+
+
+    ''' <summary>
+    ''' ინახავს პაციენტის მონაცემებს ბაზაში (მოიცავს ახლის დამატებასა და კონკრეტული ჩანაწერის განახლებას.)
+    ''' </summary>
+    ''' <param name="patient">პაციენტის მოდელი PatientsModel</param>
+    ''' <returns>აბრუნებს შენახული პაციენტის ID-ის.</returns>
+    Public Function SavePatient(patient As PatientsModel) As Integer
         Dim updatedPatientID As Integer
         Try
-            Using conn As SqlConnection = Database.GetConnectionString()
+            Using Sc As New SqlCommand("dbo.PatientSet", Database.GetConnectionString())
+                Sc.CommandType = CommandType.StoredProcedure
 
-                Using Sc As New SqlCommand("dbo.PatientSet", conn)
-                    Sc.CommandType = CommandType.StoredProcedure
+                Sc.Parameters.AddWithValue("@ID", patient.ID)
+                Sc.Parameters.AddWithValue("@FullName", patient.FullName)
+                Sc.Parameters.AddWithValue("@Dob", patient.Dob)
+                Sc.Parameters.AddWithValue("@GenderID", patient.GenderID)
+                Sc.Parameters.AddWithValue("@Phone", patient.Phone)
+                Sc.Parameters.AddWithValue("@Address", patient.Address)
+                Sc.Parameters.AddWithValue("@Email", patient.Email)
+                Sc.Parameters.AddWithValue("@PersonalNumber", patient.PersonalNumber)
+                Sc.Parameters.AddWithValue("@IsActive", patient.IsActive)
 
-                    Sc.Parameters.AddWithValue("@ID", PatientID)
-                    Sc.Parameters.AddWithValue("@FullName", FullName)
-                    Sc.Parameters.AddWithValue("@Dob", Dob)
-                    Sc.Parameters.AddWithValue("@GenderID", GenderID)
-                    Sc.Parameters.AddWithValue("@Phone", Phone)
-                    Sc.Parameters.AddWithValue("@Address", Address)
+                If Sc.Connection.State = ConnectionState.Closed Then Sc.Connection.Open()
 
-                    conn.Open()
-
-                    updatedPatientID = Convert.ToInt32(Sc.ExecuteScalar())
-                End Using
+                updatedPatientID = Convert.ToInt32(Sc.ExecuteScalar())
             End Using
         Catch ex As Exception
             MessageBox.Show($"პაციენტის განახლება ვერ მოხერხდა. ერორი: {ex.Message}", "დაფიქსირდა შეცდომა", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -72,6 +119,11 @@ Public Class PatientsHandler
         Return updatedPatientID
     End Function
 
+    ''' <summary>
+    ''' შლის პაციენტებს შესაბამისი ID-ების მიხედვით.
+    ''' </summary>
+    ''' <param name="PatientsIDList"> პაციენტების ID-ების სია </param>
+    ''' <returns>აბრუნებს წაშლილი პაციენტების რაოდენობას.</returns>
     Public Function DeletePatients(PatientsIDList As DataTable) As Integer
         If PatientsIDList Is Nothing OrElse PatientsIDList.Rows.Count = 0 Then Return 0
         Dim DeletedRows As Integer = 0
@@ -93,7 +145,10 @@ Public Class PatientsHandler
         Return DeletedRows
     End Function
 
-
+    ''' <summary>
+    ''' ტვირთავს Gender List-ს კომბობოქსში.
+    ''' </summary>
+    ''' <param name="ComboBoxGender"></param>
     Public Sub GetGenders(ComboBoxGender As ComboBox)
         Try
             Using Sa As New SqlDataAdapter("dbo.GenderListGet", Database.GetConnectionString())
