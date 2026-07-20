@@ -26,8 +26,10 @@ Public Class PatientsHandler
                 patientModel.Phone = dt.Rows(0)("Phone").ToString()
                 patientModel.Address = dt.Rows(0)("Address").ToString()
                 patientModel.Email = dt.Rows(0)("Email").ToString()
+                patientModel.InsuranceID = CInt(If(IsDBNull(dt.Rows(0)("InsuranceID")), 0, dt.Rows(0)("InsuranceID")))
+                patientModel.InsuranceName = dt.Rows(0)("InsuranceName").ToString()
                 patientModel.PersonalNumber = dt.Rows(0)("PersonalNumber").ToString()
-                patientModel.IsActive = dt.Rows(0)("IsActive")
+                patientModel.IsDelete = dt.Rows(0)("IsDelete")
             End If
 
         Catch ex As Exception
@@ -44,9 +46,9 @@ Public Class PatientsHandler
     ''' <param name="FullName">პაციენტის გვარი სახელი</param>
     ''' <param name="PersonalNumber">პაციენტის პირადი ნომერი</param>
     ''' <param name="Email">პაციენტის ელ. ფოსტა</param>
-    ''' <param name="IsActive">არის თუ არა პაციენტი აქტიური (True/False)</param>
+    ''' <param name="IsDelete">არის თუ არა პაციენტი აქტიური (True/False)</param>
     ''' <returns>აბრუნებს მოძებნილ პაციენტებს.</returns>
-    Public Function GetPatientsList(ID As Integer, FullName As String, PersonalNumber As String, Email As String, IsActive As Integer, Optional Top_50 As Boolean? = Nothing) As DataTable
+    Public Function GetPatientsList(ID As Integer, FullName As String, PersonalNumber As String, Email As String, IsDelete As Integer, Optional Top_50 As Boolean? = Nothing) As DataTable
         Dim dt As New DataTable()
 
         Try
@@ -56,7 +58,7 @@ Public Class PatientsHandler
                 Sa.SelectCommand.Parameters.AddWithValue("@FullName", If(String.IsNullOrWhiteSpace(FullName), "", FullName))
                 Sa.SelectCommand.Parameters.AddWithValue("@PersonalNumber", If(String.IsNullOrWhiteSpace(PersonalNumber), "", PersonalNumber))
                 Sa.SelectCommand.Parameters.AddWithValue("@Email", If(String.IsNullOrWhiteSpace(Email), "", Email))
-                Sa.SelectCommand.Parameters.AddWithValue("@IsActive", IsActive)
+                Sa.SelectCommand.Parameters.AddWithValue("@IsDelete", IsDelete)
                 Sa.SelectCommand.Parameters.AddWithValue("@TOP_50", If(Top_50.HasValue, Top_50, DBNull.Value))
                 Sa.Fill(dt)
             End Using
@@ -77,7 +79,8 @@ Public Class PatientsHandler
             Using Sa As New SqlDataAdapter("dbo.PatientsListGetByIdsReport", Database.GetConnectionString())
                 Sa.SelectCommand.CommandType = CommandType.StoredProcedure
                 Sa.SelectCommand.Parameters.AddWithValue("@IdsList", idsList)
-                Sa.Fill(ds.dtPatients)
+                Sa.TableMappings.Add("Table", ds.dtPatients.TableName)
+                Sa.Fill(ds)
             End Using
         Catch ex As Exception
             MessageBox.Show($"პაციენტები ვერ ჩაიტვირთა. ერორი: {ex.Message}", "დაფიქსირდა შეცდომა", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -106,7 +109,8 @@ Public Class PatientsHandler
                 Sc.Parameters.AddWithValue("@Address", patient.Address)
                 Sc.Parameters.AddWithValue("@Email", patient.Email)
                 Sc.Parameters.AddWithValue("@PersonalNumber", patient.PersonalNumber)
-                Sc.Parameters.AddWithValue("@IsActive", patient.IsActive)
+                Sc.Parameters.AddWithValue("@InsuranceID", If(patient.InsuranceID = 0, DBNull.Value, patient.InsuranceID))
+                Sc.Parameters.AddWithValue("@IsDelete", patient.IsDelete)
 
                 If Sc.Connection.State = ConnectionState.Closed Then Sc.Connection.Open()
 
@@ -158,6 +162,32 @@ Public Class PatientsHandler
                 ComboBoxGender.DataSource = dt
                 ComboBoxGender.ValueMember = "GenderID"
                 ComboBoxGender.DisplayMember = "GenderName"
+            End Using
+        Catch ex As Exception
+            MessageBox.Show($"სქესის ჩატვირთვა ვერ მოხერხდა. შეცდომა: {ex.Message}", "დაფიქსირდა შეცდომა", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' ტვირთავს Insurance List-ს კომბობოქსში.
+    ''' </summary>
+    ''' <param name="ComboBoxGender"></param>
+    Public Sub GetInsurance(ComboBoxInsurance As ComboBox)
+        Try
+            Using Sa As New SqlDataAdapter("dbo.InsuranceListGet", Database.GetConnectionString())
+                Dim dt As New DataTable()
+                Sa.SelectCommand.CommandType = CommandType.StoredProcedure
+                Sa.Fill(dt)
+
+                'ვამატებთ Default მნიშვნელობას, თუ მომხმ.-ს არ აქვს დაზღვევა.
+                Dim defaultRow As DataRow = dt.NewRow()
+                defaultRow("ID") = 0
+                defaultRow("InsuranceName") = "არ აქვს"
+                dt.Rows.InsertAt(defaultRow, 0)
+
+                ComboBoxInsurance.DataSource = dt
+                ComboBoxInsurance.ValueMember = "ID"
+                ComboBoxInsurance.DisplayMember = "InsuranceName"
             End Using
         Catch ex As Exception
             MessageBox.Show($"სქესის ჩატვირთვა ვერ მოხერხდა. შეცდომა: {ex.Message}", "დაფიქსირდა შეცდომა", MessageBoxButtons.OK, MessageBoxIcon.Error)

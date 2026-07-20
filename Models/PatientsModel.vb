@@ -8,6 +8,8 @@
     Public Property Address As String = ""
     Public Property PersonalNumber As String = ""
     Public Property Email As String = ""
-    Public Property IsActive As Boolean = True
+    Public Property InsuranceID As Integer = Nothing
+    Public Property InsuranceName As String = ""
+    Public Property AddressAndEmail As String = ""
     Public Property IsDelete As Boolean = False
 End Class

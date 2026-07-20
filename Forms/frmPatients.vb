@@ -16,12 +16,8 @@ Public Class frmPatients
 
 
     Private Sub frmPatients_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim PatientStatus As New PatientStatusModel()
-
-        'კომბობოქსის შევსება - პაციენტის სტატუსებით
-        PatientStatus.FillCBWithPatientStatuses(cbPatientStatus)
         'Default მნიშვნელობის მინიჭება ComboBox-ზე.
-        cbPatientStatus.SelectedValue = 1
+        cbPatientStatus.SelectedIndex = 0
 
         updateGCPatients()
         gvPatients.BestFitColumns()
@@ -48,21 +44,12 @@ Public Class frmPatients
         If IsDialogConfirmed <> DialogResult.Yes Then
             Return
         End If
-
-        Dim idsList As New DataTable()
-        idsList.Columns.Add("ID", GetType(Integer))
-
-        For Each row As Integer In SelectedRows
-            Dim patientID As Object = gvPatients.GetRowCellValue(row, "ID")
-            If patientID IsNot Nothing AndAlso IsNumeric(patientID) Then
-                idsList.Rows.Add(CInt(patientID))
-            End If
-        Next
-
-        Dim DeletedRowsCount As Integer = handler.DeletePatients(idsList)
+        Dim patientIdsList As DataTable = FillIdsList(SelectedRows, "ID")
+        Dim DeletedRowsCount As Integer = handler.DeletePatients(patientIdsList)
 
         If DeletedRowsCount <> 0 Then
             updateGCPatients()
+            FocusUpdatedPatient(patientIdsList.Rows(0)("ID"))
             MessageBox.Show($"{If(DeletedRowsCount > 0, "პაციენტები", "პაციენტი")} წარმატებით წაიშალა.", "პროცესი წარმატებულია", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Else
             MessageBox.Show("ჩანაწერები ვერ მოიძებნა.", "ერორი", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -73,7 +60,18 @@ Public Class frmPatients
         Dim frmAddEdit As New frmPatientAddEdit(patientID)
         If frmAddEdit.ShowDialog() = DialogResult.OK Then
             updateGCPatients()
+            If patientID > 0 Then
+                FocusUpdatedPatient(patientID)
+            End If
         End If
+    End Sub
+
+    Private Sub FocusUpdatedPatient(patientID As Integer)
+        gvPatients.ClearSelection()
+
+        Dim rowHandle As Integer = gvPatients.LocateByValue("ID", patientID)
+        gvPatients.SelectRow(rowHandle)
+        gvPatients.FocusedRowHandle = rowHandle
     End Sub
 
     Private Sub updateGCPatients(Optional Top_50 As Boolean? = Nothing)
@@ -82,26 +80,20 @@ Public Class frmPatients
         Dim FullName As String = txtPatientFullName.Text.Trim()
         Dim PersonalNumber As String = txtPatientPersonalNumber.Text.Trim()
         Dim Email As String = txtPatientEmail.Text.Trim()
-        Dim Status As Integer = Convert.ToInt32(cbPatientStatus.SelectedValue)
+        Dim Status As Integer = cbPatientStatus.SelectedIndex
         gcPatients.DataSource = handler.GetPatientsList(ID, FullName, PersonalNumber, Email, Status)
     End Sub
 
-
-
-
-
-
     Private Sub ExportPatientData(PatientID As Integer)
-        'Dim patientData As DataTable = handler.GetPatientsList(PatientID, String.Empty, String.Empty, String.Empty, -1)
-        Dim patientData As PatientsModel = handler.GetPatientByID(PatientID)
+        Dim dtPatientID As New DataTable()
+        dtPatientID.Columns.Add("ID", GetType(Integer))
+        dtPatientID.Rows.Add(PatientID)
+
+        Dim patientData As dsPatientsReport = handler.GetPatientsListByIds(dtPatientID)
 
         Dim printReport As New XtraPatientReport()
-
         printReport.DataSource = patientData
-
-        Dim printTool As New ReportPrintTool(printReport)
-
-        printTool.ShowRibbonPreviewDialog()
+        printReport.ShowRibbonPreviewDialog()
     End Sub
 
     Private Sub ExportPatientsDataTable(idsList As DataTable)
@@ -109,9 +101,8 @@ Public Class frmPatients
         Dim printReport As New XtraPatientsCouple()
 
         printReport.DataSource = patientsTable
-        Dim printTool As New ReportPrintTool(printReport)
 
-        printTool.ShowRibbonPreviewDialog()
+        printReport.ShowRibbonPreviewDialog()
 
     End Sub
 
@@ -124,35 +115,25 @@ Public Class frmPatients
         txtPatientFullName.Text = String.Empty
         txtPatientPersonalNumber.Text = String.Empty
         txtPatientEmail.Text = String.Empty
-        cbPatientStatus.SelectedValue = 1
+        cbPatientStatus.SelectedIndex = 0
         updateGCPatients()
     End Sub
 
     Private Sub tsBtnExport_Click_1(sender As Object, e As EventArgs) Handles tsBtnExport.Click
         Dim selectedPatientsRows() As Integer = gvPatients.GetSelectedRows()
 
-        If selectedPatientsRows.Length = 0 Then
+        If selectedPatientsRows.Count = 0 Then
             MessageBox.Show("გთხოვთ აირჩიოთ ერთი ან რამდენიმე პაციენტი.", "გაფრთხილება", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
 
-        Dim idsList As New DataTable()
-        idsList.Columns.Add("ID", GetType(Integer))
-
-        For Each rowHandle In selectedPatientsRows
-            Dim patientID As Object = gvPatients.GetRowCellValue(rowHandle, colID)
-            If patientID IsNot Nothing And IsNumeric(patientID) Then
-                idsList.Rows.Add(CInt(patientID))
-            End If
-        Next
-
         'გაეშვება რამდენიმე პაციენტისთვის განკუთვნილი ფუნქცია.
-        ExportPatientsDataTable(idsList)
+        ExportPatientsDataTable(FillIdsList(selectedPatientsRows, "ID"))
         Exit Sub
     End Sub
 
     Private Sub tsBtnDetailExport_Click(sender As Object, e As EventArgs) Handles tsBtnDetailExport.Click
-        Dim selectedPatientRowVal As Object = gvPatients.GetFocusedRowCellValue(colID)
+        Dim selectedPatientRowVal = gvPatients.GetFocusedRowCellValue(colID)
         Dim selectedPatientID As Integer
         If selectedPatientRowVal IsNot Nothing AndAlso IsNumeric(selectedPatientRowVal) Then
             selectedPatientID = CInt(selectedPatientRowVal)
@@ -182,4 +163,25 @@ Public Class frmPatients
             updateGCPatients()
         End If
     End Sub
+
+    ''' <summary>
+    ''' ავსებს მონაცემთა ცხრილს დინამიურად. 
+    ''' </summary>
+    ''' <param name="rows">არჩეული სტრიქონები</param>
+    ''' <param name="columnName">სვეტის დასახელება</param>
+    ''' <returns>აბრუნებს შევსებულ ცხრილს, გადაცემული სტრიქონების მიხედვით</returns>
+    Private Function FillIdsList(rows() As Integer, Optional columnName As String = "ID") As DataTable
+        Dim idsList As New DataTable()
+        idsList.Columns.Add(columnName, GetType(Integer))
+
+        For Each rowHadle In rows
+            Dim rowValue As Object = gvPatients.GetRowCellValue(rowHadle, colID)
+            If rowValue IsNot Nothing And IsNumeric(rowValue) Then
+                idsList.Rows.Add(CInt(rowValue))
+            End If
+        Next
+
+        Return idsList
+    End Function
+
 End Class

@@ -20,7 +20,7 @@ Option Explicit On
  Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
  Global.System.ComponentModel.ToolboxItem(true),  _
  Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema"),  _
- Global.System.Xml.Serialization.XmlRootAttribute("dsReports"),  _
+ Global.System.Xml.Serialization.XmlRootAttribute("dsPatientsReport"),  _
  Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")>  _
 Partial Public Class dsPatientsReport
     Inherits Global.System.Data.DataSet
@@ -199,7 +199,7 @@ Partial Public Class dsPatientsReport
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
     Private Sub InitClass()
-        Me.DataSetName = "dsReports"
+        Me.DataSetName = "dsPatientsReport"
         Me.Prefix = ""
         Me.Namespace = "http://tempuri.org/dsReports.xsd"
         Me.EnforceConstraints = true
@@ -299,7 +299,9 @@ Partial Public Class dsPatientsReport
         
         Private columnAddress As Global.System.Data.DataColumn
         
-        Private columnIsActive As Global.System.Data.DataColumn
+        Private columnInsuranceName As Global.System.Data.DataColumn
+        
+        Private columnIsDelete As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
@@ -402,9 +404,17 @@ Partial Public Class dsPatientsReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public ReadOnly Property IsActiveColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property InsuranceNameColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnIsActive
+                Return Me.columnInsuranceName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property IsDeleteColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsDelete
             End Get
         End Property
         
@@ -445,9 +455,9 @@ Partial Public Class dsPatientsReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AdddtPatientsRow(ByVal ID As Integer, ByVal FullName As String, ByVal PersonalNumber As String, ByVal Email As String, ByVal Dob As Date, ByVal Gender As String, ByVal Phone As String, ByVal Address As String, ByVal IsActive As String) As dtPatientsRow
+        Public Overloads Function AdddtPatientsRow(ByVal ID As Integer, ByVal FullName As String, ByVal PersonalNumber As String, ByVal Email As String, ByVal Dob As Date, ByVal Gender As String, ByVal Phone As String, ByVal Address As String, ByVal InsuranceName As String, ByVal IsDelete As String) As dtPatientsRow
             Dim rowdtPatientsRow As dtPatientsRow = CType(Me.NewRow,dtPatientsRow)
-            Dim columnValuesArray() As Object = New Object() {ID, FullName, PersonalNumber, Email, Dob, Gender, Phone, Address, IsActive}
+            Dim columnValuesArray() As Object = New Object() {ID, FullName, PersonalNumber, Email, Dob, Gender, Phone, Address, InsuranceName, IsDelete}
             rowdtPatientsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowdtPatientsRow)
             Return rowdtPatientsRow
@@ -478,7 +488,8 @@ Partial Public Class dsPatientsReport
             Me.columnGender = MyBase.Columns("Gender")
             Me.columnPhone = MyBase.Columns("Phone")
             Me.columnAddress = MyBase.Columns("Address")
-            Me.columnIsActive = MyBase.Columns("IsActive")
+            Me.columnInsuranceName = MyBase.Columns("InsuranceName")
+            Me.columnIsDelete = MyBase.Columns("IsDelete")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -500,16 +511,10 @@ Partial Public Class dsPatientsReport
             MyBase.Columns.Add(Me.columnPhone)
             Me.columnAddress = New Global.System.Data.DataColumn("Address", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnAddress)
-            Me.columnIsActive = New Global.System.Data.DataColumn("IsActive", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnIsActive)
-            Me.columnFullName.Caption = "პაციენტის გვარი, სახელი"
-            Me.columnPersonalNumber.Caption = "პირადი ნომერი"
-            Me.columnEmail.Caption = "ელ. ფოსტა"
-            Me.columnDob.Caption = "დაბ. თარიღი"
-            Me.columnGender.Caption = "სქესი"
-            Me.columnPhone.Caption = "მობ. ნომერი"
-            Me.columnAddress.Caption = "მისამართი"
-            Me.columnIsActive.Caption = "აქტიური"
+            Me.columnInsuranceName = New Global.System.Data.DataColumn("InsuranceName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnInsuranceName)
+            Me.columnIsDelete = New Global.System.Data.DataColumn("IsDelete", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnIsDelete)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -776,16 +781,31 @@ Partial Public Class dsPatientsReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property IsActive() As String
+        Public Property InsuranceName() As String
             Get
                 Try 
-                    Return CType(Me(Me.tabledtPatients.IsActiveColumn),String)
+                    Return CType(Me(Me.tabledtPatients.InsuranceNameColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'IsActive' in table 'dtPatients' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'InsuranceName' in table 'dtPatients' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tabledtPatients.IsActiveColumn) = value
+                Me(Me.tabledtPatients.InsuranceNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property IsDelete() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabledtPatients.IsDeleteColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'IsDelete' in table 'dtPatients' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledtPatients.IsDeleteColumn) = value
             End Set
         End Property
         
@@ -887,14 +907,26 @@ Partial Public Class dsPatientsReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Function IsIsActiveNull() As Boolean
-            Return Me.IsNull(Me.tabledtPatients.IsActiveColumn)
+        Public Function IsInsuranceNameNull() As Boolean
+            Return Me.IsNull(Me.tabledtPatients.InsuranceNameColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub SetIsActiveNull()
-            Me(Me.tabledtPatients.IsActiveColumn) = Global.System.Convert.DBNull
+        Public Sub SetInsuranceNameNull()
+            Me(Me.tabledtPatients.InsuranceNameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsIsDeleteNull() As Boolean
+            Return Me.IsNull(Me.tabledtPatients.IsDeleteColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetIsDeleteNull()
+            Me(Me.tabledtPatients.IsDeleteColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

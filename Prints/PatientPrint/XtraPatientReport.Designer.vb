@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Public Class XtraPatientReport
     Inherits DevExpress.XtraReports.UI.XtraReport
 
     'XtraReport overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Public Class XtraPatientReport
     'NOTE: The following procedure is required by the Designer
     'It can be modified using the Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(XtraPatientReport))
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
@@ -25,6 +25,8 @@ Partial Public Class XtraPatientReport
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
         Me.XrLabel20 = New DevExpress.XtraReports.UI.XRLabel()
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
+        Me.XrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel22 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel21 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel4 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel17 = New DevExpress.XtraReports.UI.XRLabel()
@@ -43,15 +45,9 @@ Partial Public Class XtraPatientReport
         Me.XrLabel6 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.DsReports1 = New patients_crud_app.dsPatientsReport()
         Me.XrPictureBox1 = New DevExpress.XtraReports.UI.XRPictureBox()
         Me.ReportHeader = New DevExpress.XtraReports.UI.ReportHeaderBand()
         Me.XrLine1 = New DevExpress.XtraReports.UI.XRLine()
-        Me.DsReports2 = New patients_crud_app.dsPatientsReport()
-        Me.DsPatientsReport1 = New patients_crud_app.dsPatientsReport()
-        CType(Me.DsReports1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DsReports2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DsPatientsReport1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'TopMargin
@@ -99,11 +95,38 @@ Partial Public Class XtraPatientReport
         '
         'Detail
         '
-        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel21, Me.XrLabel4, Me.XrLabel17, Me.XrLabel18, Me.XrLabel9, Me.XrLabel10, Me.XrLabel11, Me.XrLabel12, Me.XrLabel13, Me.XrLabel14, Me.XrLabel15, Me.XrLabel16, Me.XrLabel7, Me.XrLabel8, Me.XrLabel5, Me.XrLabel6, Me.XrLabel3, Me.XrLabel1})
+        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel2, Me.XrLabel22, Me.XrLabel21, Me.XrLabel4, Me.XrLabel17, Me.XrLabel18, Me.XrLabel9, Me.XrLabel10, Me.XrLabel11, Me.XrLabel12, Me.XrLabel13, Me.XrLabel14, Me.XrLabel15, Me.XrLabel16, Me.XrLabel7, Me.XrLabel8, Me.XrLabel5, Me.XrLabel6, Me.XrLabel3, Me.XrLabel1})
         Me.Detail.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Detail.HeightF = 593.3712!
         Me.Detail.Name = "Detail"
         Me.Detail.StylePriority.UseFont = False
+        '
+        'XrLabel2
+        '
+        Me.XrLabel2.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 194.0!)
+        Me.XrLabel2.Multiline = True
+        Me.XrLabel2.Name = "XrLabel2"
+        Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel2.SizeF = New System.Drawing.SizeF(115.9722!, 23.0!)
+        Me.XrLabel2.StylePriority.UseFont = False
+        Me.XrLabel2.StylePriority.UseTextAlignment = False
+        Me.XrLabel2.Text = "დაზღვევა:"
+        Me.XrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        '
+        'XrLabel22
+        '
+        Me.XrLabel22.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[InsuranceName]")})
+        Me.XrLabel22.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XrLabel22.LocationFloat = New DevExpress.Utils.PointFloat(115.9722!, 194.0!)
+        Me.XrLabel22.Multiline = True
+        Me.XrLabel22.Name = "XrLabel22"
+        Me.XrLabel22.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel22.SizeF = New System.Drawing.SizeF(250.2651!, 23.00001!)
+        Me.XrLabel22.StylePriority.UseFont = False
+        Me.XrLabel22.StylePriority.UseTextAlignment = False
+        Me.XrLabel22.Text = "გვარი, სახელი:"
+        Me.XrLabel22.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel21
         '
@@ -131,9 +154,9 @@ Partial Public Class XtraPatientReport
         '
         'XrLabel17
         '
-        Me.XrLabel17.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IsActive] = True, 'აქტიური', 'პასიური')")})
+        Me.XrLabel17.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([dtPatients].[IsDelete]==True,'პასიური','აქტიური')")})
         Me.XrLabel17.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel17.LocationFloat = New DevExpress.Utils.PointFloat(115.9723!, 194.0!)
+        Me.XrLabel17.LocationFloat = New DevExpress.Utils.PointFloat(115.9724!, 217.0!)
         Me.XrLabel17.Multiline = True
         Me.XrLabel17.Name = "XrLabel17"
         Me.XrLabel17.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -146,7 +169,7 @@ Partial Public Class XtraPatientReport
         'XrLabel18
         '
         Me.XrLabel18.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel18.LocationFloat = New DevExpress.Utils.PointFloat(0.00008477105!, 194.0!)
+        Me.XrLabel18.LocationFloat = New DevExpress.Utils.PointFloat(0.00008477105!, 217.0!)
         Me.XrLabel18.Multiline = True
         Me.XrLabel18.Name = "XrLabel18"
         Me.XrLabel18.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
@@ -345,11 +368,6 @@ Partial Public Class XtraPatientReport
         Me.XrLabel1.Text = "პაციენტის ID:"
         Me.XrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
-        'DsReports1
-        '
-        Me.DsReports1.DataSetName = "dsReports"
-        Me.DsReports1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'XrPictureBox1
         '
         Me.XrPictureBox1.BorderWidth = 0!
@@ -372,28 +390,13 @@ Partial Public Class XtraPatientReport
         Me.XrLine1.Name = "XrLine1"
         Me.XrLine1.SizeF = New System.Drawing.SizeF(824.9999!, 8.479805!)
         '
-        'DsReports2
-        '
-        Me.DsReports2.DataSetName = "dsReports"
-        Me.DsReports2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'DsPatientsReport1
-        '
-        Me.DsPatientsReport1.DataSetName = "dsReports"
-        Me.DsPatientsReport1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'XtraPatientReport
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.TopMargin, Me.BottomMargin, Me.Detail, Me.ReportHeader})
-        Me.ComponentStorage.AddRange(New System.ComponentModel.IComponent() {Me.DsReports1, Me.DsReports2, Me.DsPatientsReport1})
-        Me.DataMember = "dtPatients"
-        Me.DataSource = Me.DsPatientsReport1
+        Me.DataSourceSchema = resources.GetString("$this.DataSourceSchema")
         Me.Font = New System.Drawing.Font("Arial", 9.75!)
         Me.Margins = New System.Drawing.Printing.Margins(16, 9, 0, 43)
         Me.Version = "21.2"
-        CType(Me.DsReports1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DsReports2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DsPatientsReport1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
 
     End Sub
@@ -402,7 +405,6 @@ Partial Public Class XtraPatientReport
     Friend WithEvents BottomMargin As DevExpress.XtraReports.UI.BottomMarginBand
     Friend WithEvents Detail As DevExpress.XtraReports.UI.DetailBand
     Friend WithEvents XrLabel1 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents DsReports1 As dsPatientsReport
     Friend WithEvents XrLabel7 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel8 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel5 As DevExpress.XtraReports.UI.XRLabel
@@ -425,6 +427,6 @@ Partial Public Class XtraPatientReport
     Friend WithEvents XrLabel21 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents ReportHeader As DevExpress.XtraReports.UI.ReportHeaderBand
     Friend WithEvents XrLine1 As DevExpress.XtraReports.UI.XRLine
-    Friend WithEvents DsReports2 As dsPatientsReport
-    Friend WithEvents DsPatientsReport1 As dsPatientsReport
+    Friend WithEvents XrLabel2 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel22 As DevExpress.XtraReports.UI.XRLabel
 End Class

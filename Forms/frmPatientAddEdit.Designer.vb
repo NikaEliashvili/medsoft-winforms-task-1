@@ -23,6 +23,8 @@ Partial Class frmPatientAddEdit
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.LayoutControl1 = New DevExpress.XtraLayout.LayoutControl()
+        Me.txtEmail = New DevExpress.XtraEditors.TextEdit()
+        Me.txtPersonalNumber = New DevExpress.XtraEditors.TextEdit()
         Me.cbStatus = New System.Windows.Forms.CheckBox()
         Me.dpDob = New System.Windows.Forms.DateTimePicker()
         Me.cbGender = New System.Windows.Forms.ComboBox()
@@ -45,12 +47,14 @@ Partial Class frmPatientAddEdit
         Me.LayoutControlItem3 = New DevExpress.XtraLayout.LayoutControlItem()
         Me.EmptySpaceItem2 = New DevExpress.XtraLayout.EmptySpaceItem()
         Me.EmptySpaceItem3 = New DevExpress.XtraLayout.EmptySpaceItem()
-        Me.txtPersonalNumber = New DevExpress.XtraEditors.TextEdit()
         Me.lciPersonalNumber = New DevExpress.XtraLayout.LayoutControlItem()
-        Me.txtEmail = New DevExpress.XtraEditors.TextEdit()
         Me.lciEmail = New DevExpress.XtraLayout.LayoutControlItem()
+        Me.cbInsurance = New System.Windows.Forms.ComboBox()
+        Me.lciInsurance = New DevExpress.XtraLayout.LayoutControlItem()
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LayoutControl1.SuspendLayout()
+        CType(Me.txtEmail.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtPersonalNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtAddress.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtPhone.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtLastName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -68,10 +72,9 @@ Partial Class frmPatientAddEdit
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtPersonalNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.lciPersonalNumber, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtEmail.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.lciEmail, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.lciInsurance, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LayoutControl1
@@ -87,6 +90,7 @@ Partial Class frmPatientAddEdit
         Me.LayoutControl1.Controls.Add(Me.txtPhone)
         Me.LayoutControl1.Controls.Add(Me.txtLastName)
         Me.LayoutControl1.Controls.Add(Me.txtFirstName)
+        Me.LayoutControl1.Controls.Add(Me.cbInsurance)
         Me.LayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.LayoutControl1.Location = New System.Drawing.Point(0, 0)
         Me.LayoutControl1.Margin = New System.Windows.Forms.Padding(4)
@@ -97,9 +101,32 @@ Partial Class frmPatientAddEdit
         Me.LayoutControl1.TabIndex = 0
         Me.LayoutControl1.Text = "LayoutControl1"
         '
+        'txtEmail
+        '
+        Me.txtEmail.Location = New System.Drawing.Point(151, 120)
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Properties.Appearance.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmail.Properties.Appearance.Options.UseFont = True
+        Me.txtEmail.Size = New System.Drawing.Size(292, 32)
+        Me.txtEmail.StyleController = Me.LayoutControl1
+        Me.txtEmail.TabIndex = 16
+        '
+        'txtPersonalNumber
+        '
+        Me.txtPersonalNumber.Location = New System.Drawing.Point(151, 84)
+        Me.txtPersonalNumber.Name = "txtPersonalNumber"
+        Me.txtPersonalNumber.Properties.Appearance.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPersonalNumber.Properties.Appearance.Options.UseFont = True
+        Me.txtPersonalNumber.Properties.MaskSettings.Set("MaskManagerType", GetType(DevExpress.Data.Mask.NumericMaskManager))
+        Me.txtPersonalNumber.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False")
+        Me.txtPersonalNumber.Properties.MaskSettings.Set("mask", "d")
+        Me.txtPersonalNumber.Size = New System.Drawing.Size(292, 32)
+        Me.txtPersonalNumber.StyleController = Me.LayoutControl1
+        Me.txtPersonalNumber.TabIndex = 15
+        '
         'cbStatus
         '
-        Me.cbStatus.Location = New System.Drawing.Point(306, 305)
+        Me.cbStatus.Location = New System.Drawing.Point(306, 344)
         Me.cbStatus.Name = "cbStatus"
         Me.cbStatus.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.cbStatus.Size = New System.Drawing.Size(137, 30)
@@ -120,8 +147,10 @@ Partial Class frmPatientAddEdit
         '
         'cbGender
         '
+        Me.cbGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbGender.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbGender.FormattingEnabled = True
+        Me.cbGender.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cbGender.Location = New System.Drawing.Point(151, 194)
         Me.cbGender.Margin = New System.Windows.Forms.Padding(4)
         Me.cbGender.Name = "cbGender"
@@ -207,7 +236,7 @@ Partial Class frmPatientAddEdit
         '
         Me.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.[True]
         Me.Root.GroupBordersVisible = False
-        Me.Root.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.EmptySpaceItem1, Me.lciLastName, Me.lciPhone, Me.LayoutControlItem1, Me.LayoutControlItem2, Me.lciGender, Me.lciDob, Me.lciFirstName, Me.lciAddress, Me.LayoutControlItem3, Me.EmptySpaceItem2, Me.EmptySpaceItem3, Me.lciPersonalNumber, Me.lciEmail})
+        Me.Root.Items.AddRange(New DevExpress.XtraLayout.BaseLayoutItem() {Me.EmptySpaceItem1, Me.lciLastName, Me.lciPhone, Me.LayoutControlItem1, Me.LayoutControlItem2, Me.lciGender, Me.lciDob, Me.lciFirstName, Me.lciAddress, Me.LayoutControlItem3, Me.EmptySpaceItem2, Me.EmptySpaceItem3, Me.lciPersonalNumber, Me.lciEmail, Me.lciInsurance})
         Me.Root.Name = "Root"
         Me.Root.Size = New System.Drawing.Size(455, 497)
         Me.Root.TextVisible = False
@@ -218,9 +247,9 @@ Partial Class frmPatientAddEdit
         Me.EmptySpaceItem1.AppearanceItemCaptionDisabled.Options.UseTextOptions = True
         Me.EmptySpaceItem1.AppearanceItemCaptionDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.EmptySpaceItem1.AppearanceItemCaptionDisabled.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
-        Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 327)
+        Me.EmptySpaceItem1.Location = New System.Drawing.Point(0, 366)
         Me.EmptySpaceItem1.Name = "EmptySpaceItem1"
-        Me.EmptySpaceItem1.Size = New System.Drawing.Size(435, 110)
+        Me.EmptySpaceItem1.Size = New System.Drawing.Size(435, 71)
         Me.EmptySpaceItem1.TextSize = New System.Drawing.Size(0, 0)
         '
         'lciLastName
@@ -315,7 +344,7 @@ Partial Class frmPatientAddEdit
         'LayoutControlItem3
         '
         Me.LayoutControlItem3.Control = Me.cbStatus
-        Me.LayoutControlItem3.Location = New System.Drawing.Point(294, 293)
+        Me.LayoutControlItem3.Location = New System.Drawing.Point(294, 332)
         Me.LayoutControlItem3.Name = "LayoutControlItem3"
         Me.LayoutControlItem3.Size = New System.Drawing.Size(141, 34)
         Me.LayoutControlItem3.TextSize = New System.Drawing.Size(0, 0)
@@ -332,23 +361,10 @@ Partial Class frmPatientAddEdit
         'EmptySpaceItem3
         '
         Me.EmptySpaceItem3.AllowHotTrack = False
-        Me.EmptySpaceItem3.Location = New System.Drawing.Point(0, 293)
+        Me.EmptySpaceItem3.Location = New System.Drawing.Point(0, 332)
         Me.EmptySpaceItem3.Name = "EmptySpaceItem3"
         Me.EmptySpaceItem3.Size = New System.Drawing.Size(294, 34)
         Me.EmptySpaceItem3.TextSize = New System.Drawing.Size(0, 0)
-        '
-        'txtPersonalNumber
-        '
-        Me.txtPersonalNumber.Location = New System.Drawing.Point(151, 84)
-        Me.txtPersonalNumber.Name = "txtPersonalNumber"
-        Me.txtPersonalNumber.Properties.Appearance.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPersonalNumber.Properties.Appearance.Options.UseFont = True
-        Me.txtPersonalNumber.Properties.MaskSettings.Set("MaskManagerType", GetType(DevExpress.Data.Mask.NumericMaskManager))
-        Me.txtPersonalNumber.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False")
-        Me.txtPersonalNumber.Properties.MaskSettings.Set("mask", "d")
-        Me.txtPersonalNumber.Size = New System.Drawing.Size(292, 32)
-        Me.txtPersonalNumber.StyleController = Me.LayoutControl1
-        Me.txtPersonalNumber.TabIndex = 15
         '
         'lciPersonalNumber
         '
@@ -361,16 +377,6 @@ Partial Class frmPatientAddEdit
         Me.lciPersonalNumber.Text = "პირ. ნომერი:"
         Me.lciPersonalNumber.TextSize = New System.Drawing.Size(127, 26)
         '
-        'txtEmail
-        '
-        Me.txtEmail.Location = New System.Drawing.Point(151, 120)
-        Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Properties.Appearance.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmail.Properties.Appearance.Options.UseFont = True
-        Me.txtEmail.Size = New System.Drawing.Size(292, 32)
-        Me.txtEmail.StyleController = Me.LayoutControl1
-        Me.txtEmail.TabIndex = 16
-        '
         'lciEmail
         '
         Me.lciEmail.AppearanceItemCaption.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -381,6 +387,31 @@ Partial Class frmPatientAddEdit
         Me.lciEmail.Size = New System.Drawing.Size(435, 36)
         Me.lciEmail.Text = "ელ. ფოსტა:"
         Me.lciEmail.TextSize = New System.Drawing.Size(127, 26)
+        '
+        'cbInsurance
+        '
+        Me.cbInsurance.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbInsurance.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbInsurance.FormattingEnabled = True
+        Me.cbInsurance.Location = New System.Drawing.Point(151, 305)
+        Me.cbInsurance.Margin = New System.Windows.Forms.Padding(4)
+        Me.cbInsurance.Name = "cbInsurance"
+        Me.cbInsurance.Size = New System.Drawing.Size(292, 34)
+        Me.cbInsurance.TabIndex = 12
+        '
+        'lciInsurance
+        '
+        Me.lciInsurance.AppearanceItemCaption.Font = New System.Drawing.Font("Sylfaen", 10.0!)
+        Me.lciInsurance.AppearanceItemCaption.Options.UseFont = True
+        Me.lciInsurance.Control = Me.cbInsurance
+        Me.lciInsurance.ControlAlignment = System.Drawing.ContentAlignment.TopLeft
+        Me.lciInsurance.CustomizationFormText = "სქესი:"
+        Me.lciInsurance.Location = New System.Drawing.Point(0, 293)
+        Me.lciInsurance.Name = "lciInsurance"
+        Me.lciInsurance.Padding = New DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 6)
+        Me.lciInsurance.Size = New System.Drawing.Size(435, 39)
+        Me.lciInsurance.Text = "დაზღვევა:"
+        Me.lciInsurance.TextSize = New System.Drawing.Size(127, 26)
         '
         'frmPatientAddEdit
         '
@@ -394,6 +425,8 @@ Partial Class frmPatientAddEdit
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         CType(Me.LayoutControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LayoutControl1.ResumeLayout(False)
+        CType(Me.txtEmail.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtPersonalNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtAddress.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtPhone.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtLastName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -411,10 +444,9 @@ Partial Class frmPatientAddEdit
         CType(Me.LayoutControlItem3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.EmptySpaceItem3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtPersonalNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.lciPersonalNumber, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtEmail.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.lciEmail, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.lciInsurance, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -446,4 +478,6 @@ Partial Class frmPatientAddEdit
     Friend WithEvents txtPersonalNumber As DevExpress.XtraEditors.TextEdit
     Friend WithEvents lciPersonalNumber As DevExpress.XtraLayout.LayoutControlItem
     Friend WithEvents lciEmail As DevExpress.XtraLayout.LayoutControlItem
+    Friend WithEvents cbInsurance As ComboBox
+    Friend WithEvents lciInsurance As DevExpress.XtraLayout.LayoutControlItem
 End Class

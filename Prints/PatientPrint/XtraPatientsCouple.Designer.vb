@@ -32,6 +32,7 @@ Partial Public Class XtraPatientsCouple
         Me.XrTableCell7 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell8 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell9 = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.XrTableCell19 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
         Me.XrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
@@ -46,18 +47,13 @@ Partial Public Class XtraPatientsCouple
         Me.XrTableCell16 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell17 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell18 = New DevExpress.XtraReports.UI.XRTableCell()
-        Me.DsReports1 = New patients_crud_app.dsPatientsReport()
+        Me.XrTableCell20 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.ReportHeader = New DevExpress.XtraReports.UI.ReportHeaderBand()
         Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrPictureBox1 = New DevExpress.XtraReports.UI.XRPictureBox()
-        Me.DsReports2 = New patients_crud_app.dsPatientsReport()
         Me.GroupHeader1 = New DevExpress.XtraReports.UI.GroupHeaderBand()
-        Me.DsPatientsReport1 = New patients_crud_app.dsPatientsReport()
         CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DsReports1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DsReports2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DsPatientsReport1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'TopMargin
@@ -72,14 +68,14 @@ Partial Public Class XtraPatientsCouple
         Me.XrTable1.Name = "XrTable1"
         Me.XrTable1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96.0!)
         Me.XrTable1.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow1})
-        Me.XrTable1.SizeF = New System.Drawing.SizeF(836.0!, 25.0!)
+        Me.XrTable1.SizeF = New System.Drawing.SizeF(835.9999!, 25.0!)
         Me.XrTable1.StylePriority.UseFont = False
         Me.XrTable1.StylePriority.UseTextAlignment = False
         Me.XrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrTableRow1
         '
-        Me.XrTableRow1.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.XrTableCell1, Me.XrTableCell2, Me.XrTableCell3, Me.XrTableCell4, Me.XrTableCell5, Me.XrTableCell6, Me.XrTableCell7, Me.XrTableCell8, Me.XrTableCell9})
+        Me.XrTableRow1.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.XrTableCell1, Me.XrTableCell2, Me.XrTableCell3, Me.XrTableCell4, Me.XrTableCell5, Me.XrTableCell6, Me.XrTableCell7, Me.XrTableCell8, Me.XrTableCell9, Me.XrTableCell19})
         Me.XrTableRow1.Name = "XrTableRow1"
         Me.XrTableRow1.Weight = 1.0R
         '
@@ -185,7 +181,7 @@ Partial Public Class XtraPatientsCouple
         Me.XrTableCell8.StylePriority.UseBorders = False
         Me.XrTableCell8.StylePriority.UseFont = False
         Me.XrTableCell8.Text = "მისამართი"
-        Me.XrTableCell8.Weight = 1.3114001446156214R
+        Me.XrTableCell8.Weight = 0.77695437179816362R
         '
         'XrTableCell9
         '
@@ -198,7 +194,20 @@ Partial Public Class XtraPatientsCouple
         Me.XrTableCell9.StylePriority.UseBorders = False
         Me.XrTableCell9.StylePriority.UseFont = False
         Me.XrTableCell9.Text = "სტატუსი"
-        Me.XrTableCell9.Weight = 0.59382346298665223R
+        Me.XrTableCell9.Weight = 0.582917830644892R
+        '
+        'XrTableCell19
+        '
+        Me.XrTableCell19.Borders = CType((((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
+            Or DevExpress.XtraPrinting.BorderSide.Right) _
+            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.XrTableCell19.Font = New System.Drawing.Font("Sylfaen", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XrTableCell19.Multiline = True
+        Me.XrTableCell19.Name = "XrTableCell19"
+        Me.XrTableCell19.StylePriority.UseBorders = False
+        Me.XrTableCell19.StylePriority.UseFont = False
+        Me.XrTableCell19.Text = "დაზღვევა"
+        Me.XrTableCell19.Weight = 0.582917830644892R
         '
         'BottomMargin
         '
@@ -242,13 +251,13 @@ Partial Public Class XtraPatientsCouple
         '
         'XrTableRow2
         '
-        Me.XrTableRow2.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.XrTableCell10, Me.XrTableCell11, Me.XrTableCell12, Me.XrTableCell13, Me.XrTableCell14, Me.XrTableCell15, Me.XrTableCell16, Me.XrTableCell17, Me.XrTableCell18})
+        Me.XrTableRow2.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.XrTableCell10, Me.XrTableCell11, Me.XrTableCell12, Me.XrTableCell13, Me.XrTableCell14, Me.XrTableCell15, Me.XrTableCell16, Me.XrTableCell17, Me.XrTableCell18, Me.XrTableCell20})
         Me.XrTableRow2.Name = "XrTableRow2"
         Me.XrTableRow2.Weight = 1.0R
         '
         'XrTableCell10
         '
-        Me.XrTableCell10.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[ID]")})
+        Me.XrTableCell10.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[dtPatients].[ID]")})
         Me.XrTableCell10.Multiline = True
         Me.XrTableCell10.Name = "XrTableCell10"
         Me.XrTableCell10.Text = "XrTableCell10"
@@ -264,7 +273,7 @@ Partial Public Class XtraPatientsCouple
         '
         'XrTableCell12
         '
-        Me.XrTableCell12.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "IsNull([PersonalNumber], '-')")})
+        Me.XrTableCell12.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PersonalNumber]")})
         Me.XrTableCell12.Multiline = True
         Me.XrTableCell12.Name = "XrTableCell12"
         Me.XrTableCell12.Text = "XrTableCell12"
@@ -272,7 +281,7 @@ Partial Public Class XtraPatientsCouple
         '
         'XrTableCell13
         '
-        Me.XrTableCell13.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "IsNull([Email],'-')")})
+        Me.XrTableCell13.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Email]")})
         Me.XrTableCell13.Multiline = True
         Me.XrTableCell13.Name = "XrTableCell13"
         Me.XrTableCell13.Text = "XrTableCell13"
@@ -297,7 +306,7 @@ Partial Public Class XtraPatientsCouple
         '
         'XrTableCell16
         '
-        Me.XrTableCell16.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "IsNull([Phone],'-')")})
+        Me.XrTableCell16.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Phone]")})
         Me.XrTableCell16.Multiline = True
         Me.XrTableCell16.Name = "XrTableCell16"
         Me.XrTableCell16.Text = "XrTableCell16"
@@ -305,24 +314,27 @@ Partial Public Class XtraPatientsCouple
         '
         'XrTableCell17
         '
-        Me.XrTableCell17.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "IsNull([Address],'-' )")})
+        Me.XrTableCell17.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Address]")})
         Me.XrTableCell17.Multiline = True
         Me.XrTableCell17.Name = "XrTableCell17"
         Me.XrTableCell17.Text = "XrTableCell17"
-        Me.XrTableCell17.Weight = 1.5347905313451486R
+        Me.XrTableCell17.Weight = 0.90930317749001466R
         '
         'XrTableCell18
         '
-        Me.XrTableCell18.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IsActive]=True, 'აქტიური','პასიური')")})
+        Me.XrTableCell18.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IsDelete]=True, 'პასიური','აქტიური')")})
         Me.XrTableCell18.Multiline = True
         Me.XrTableCell18.Name = "XrTableCell18"
         Me.XrTableCell18.Text = "XrTableCell18"
-        Me.XrTableCell18.Weight = 0.69497812481541166R
+        Me.XrTableCell18.Weight = 0.68221623190442882R
         '
-        'DsReports1
+        'XrTableCell20
         '
-        Me.DsReports1.DataSetName = "dsReports"
-        Me.DsReports1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        Me.XrTableCell20.ExpressionBindings.AddRange(New DevExpress.XtraReports.UI.ExpressionBinding() {New DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[dtPatients].[InsuranceName]")})
+        Me.XrTableCell20.Multiline = True
+        Me.XrTableCell20.Name = "XrTableCell20"
+        Me.XrTableCell20.Text = "XrTableCell20"
+        Me.XrTableCell20.Weight = 0.68221623190442882R
         '
         'ReportHeader
         '
@@ -351,11 +363,6 @@ Partial Public Class XtraPatientsCouple
         Me.XrPictureBox1.SizeF = New System.Drawing.SizeF(145.0942!, 75.0!)
         Me.XrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage
         '
-        'DsReports2
-        '
-        Me.DsReports2.DataSetName = "dsReports"
-        Me.DsReports2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'GroupHeader1
         '
         Me.GroupHeader1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrTable1})
@@ -364,26 +371,16 @@ Partial Public Class XtraPatientsCouple
         Me.GroupHeader1.Name = "GroupHeader1"
         Me.GroupHeader1.RepeatEveryPage = True
         '
-        'DsPatientsReport1
-        '
-        Me.DsPatientsReport1.DataSetName = "dsReports"
-        Me.DsPatientsReport1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'XtraPatientsCouple
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.TopMargin, Me.BottomMargin, Me.Detail, Me.ReportHeader, Me.GroupHeader1})
         Me.BorderColor = System.Drawing.Color.DarkGray
-        Me.ComponentStorage.AddRange(New System.ComponentModel.IComponent() {Me.DsReports1, Me.DsReports2, Me.DsPatientsReport1})
-        Me.DataMember = "dtPatients"
-        Me.DataSource = Me.DsPatientsReport1
+        Me.DataSourceSchema = resources.GetString("$this.DataSourceSchema")
         Me.Font = New System.Drawing.Font("Arial", 9.75!)
         Me.Margins = New System.Drawing.Printing.Margins(6, 8, 0, 31)
         Me.Version = "21.2"
         CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrTable2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DsReports1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DsReports2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DsPatientsReport1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
 
     End Sub
@@ -391,7 +388,7 @@ Partial Public Class XtraPatientsCouple
     Friend WithEvents TopMargin As DevExpress.XtraReports.UI.TopMarginBand
     Friend WithEvents BottomMargin As DevExpress.XtraReports.UI.BottomMarginBand
     Friend WithEvents Detail As DevExpress.XtraReports.UI.DetailBand
-    Friend WithEvents DsReports1 As dsPatientsReport
+    'Friend WithEvents DsReports1 As dsPatientsReport
     Friend WithEvents XrTable1 As DevExpress.XtraReports.UI.XRTable
     Friend WithEvents XrTableRow1 As DevExpress.XtraReports.UI.XRTableRow
     Friend WithEvents XrTableCell1 As DevExpress.XtraReports.UI.XRTableCell
@@ -417,8 +414,10 @@ Partial Public Class XtraPatientsCouple
     Friend WithEvents XrTableCell16 As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents XrTableCell17 As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents XrTableCell18 As DevExpress.XtraReports.UI.XRTableCell
-    Friend WithEvents DsReports2 As dsPatientsReport
+    'Friend WithEvents DsReports2 As dsPatientsReport
     Friend WithEvents XrLabel2 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents GroupHeader1 As DevExpress.XtraReports.UI.GroupHeaderBand
-    Friend WithEvents DsPatientsReport1 As dsPatientsReport
+    Friend WithEvents XrTableCell19 As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents XrTableCell20 As DevExpress.XtraReports.UI.XRTableCell
+    'Friend WithEvents DsPatientsReport1 As dsPatientsReport
 End Class

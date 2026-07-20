@@ -13,6 +13,7 @@ Public Class frmPatientAddEdit
 
     Private Sub frmPatientAddEdit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         handler.GetGenders(cbGender)
+        handler.GetInsurance(cbInsurance)
         Dim PatientData As New PatientsModel
         If currentPatientID > 0 Then
             Me.Text = "პაციენტის რედაქტირება"
@@ -25,7 +26,8 @@ Public Class frmPatientAddEdit
             GenderID = PatientData.GenderID
             Phone = PatientData.Phone
             Address = PatientData.Address
-            IsActive = PatientData.IsActive
+            InsuranceID = If(IsDBNull(PatientData.InsuranceID), 0, PatientData.InsuranceID)
+            IsActive = Not PatientData.IsDelete
         Else
             Me.Text = "პაციენტის დამატება"
             LastName = ""
@@ -35,6 +37,7 @@ Public Class frmPatientAddEdit
             GenderID = 1
             Phone = ""
             Address = ""
+            InsuranceID = 0
             IsActive = True
         End If
 
@@ -121,6 +124,15 @@ Public Class frmPatientAddEdit
             txtAddress.Text = value.Trim()
         End Set
     End Property
+    Public Property InsuranceID As Integer
+        Get
+            Return cbInsurance.SelectedValue
+        End Get
+        Set(value As Integer)
+            cbInsurance.SelectedValue = value
+        End Set
+    End Property
+
     Public Property IsActive As Boolean
         Get
             Return cbStatus.Checked
@@ -224,7 +236,8 @@ Public Class frmPatientAddEdit
         patientObj.GenderID = GenderID
         patientObj.Phone = Phone
         patientObj.Address = Address
-        patientObj.IsActive = IsActive
+        patientObj.InsuranceID = InsuranceID
+        patientObj.IsDelete = Not IsActive
 
 
 

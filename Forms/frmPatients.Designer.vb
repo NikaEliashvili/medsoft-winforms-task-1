@@ -33,7 +33,10 @@ Partial Class frmPatients
         Me.colDob = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colAddress = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
+        Me.colInsurance = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colIsActive = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colAddressAndEmail = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemMemoEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
         Me.tsMenu = New System.Windows.Forms.ToolStrip()
         Me.tsBtnAdd = New System.Windows.Forms.ToolStripButton()
         Me.tsBtnEdit = New System.Windows.Forms.ToolStripButton()
@@ -59,6 +62,7 @@ Partial Class frmPatients
         CType(Me.gcPatients, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gvPatients, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemMemoEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tsMenu.SuspendLayout()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSearch.SuspendLayout()
@@ -68,12 +72,12 @@ Partial Class frmPatients
         '
         Me.gcPatients.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gcPatients.EmbeddedNavigator.Margin = New System.Windows.Forms.Padding(14)
-        Me.gcPatients.Location = New System.Drawing.Point(0, 138)
+        Me.gcPatients.Location = New System.Drawing.Point(0, 134)
         Me.gcPatients.MainView = Me.gvPatients
         Me.gcPatients.Margin = New System.Windows.Forms.Padding(14)
         Me.gcPatients.Name = "gcPatients"
-        Me.gcPatients.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemMemoEdit1})
-        Me.gcPatients.Size = New System.Drawing.Size(1392, 502)
+        Me.gcPatients.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemMemoEdit1, Me.RepositoryItemMemoEdit2})
+        Me.gcPatients.Size = New System.Drawing.Size(1416, 516)
         Me.gcPatients.TabIndex = 1
         Me.gcPatients.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gvPatients})
         '
@@ -135,7 +139,7 @@ Partial Class frmPatients
         Me.gvPatients.Appearance.VertLine.Options.UseFont = True
         Me.gvPatients.Appearance.ViewCaption.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gvPatients.Appearance.ViewCaption.Options.UseFont = True
-        Me.gvPatients.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.colID, Me.colFullName, Me.colPersonalNumber, Me.colEmail, Me.colPhone, Me.colGender, Me.colDob, Me.colAddress, Me.colIsActive})
+        Me.gvPatients.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.colID, Me.colFullName, Me.colPersonalNumber, Me.colEmail, Me.colPhone, Me.colGender, Me.colDob, Me.colAddress, Me.colInsurance, Me.colIsActive, Me.colAddressAndEmail})
         Me.gvPatients.DetailHeight = 1534
         Me.gvPatients.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFullFocus
         Me.gvPatients.GridControl = Me.gcPatients
@@ -147,109 +151,181 @@ Partial Class frmPatients
         'colID
         '
         Me.colID.AccessibleName = ""
+        Me.colID.AppearanceCell.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.colID.AppearanceCell.Options.UseFont = True
         Me.colID.Caption = "ID"
         Me.colID.FieldName = "ID"
         Me.colID.MinWidth = 45
         Me.colID.Name = "colID"
+        Me.colID.OptionsColumn.AllowEdit = False
+        Me.colID.OptionsColumn.ReadOnly = True
         Me.colID.Visible = True
         Me.colID.VisibleIndex = 0
-        Me.colID.Width = 168
+        Me.colID.Width = 142
         '
         'colFullName
         '
+        Me.colFullName.AppearanceCell.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.colFullName.AppearanceCell.Options.UseFont = True
         Me.colFullName.Caption = "პაციენტის გვარი, სახელი"
         Me.colFullName.FieldName = "FullName"
         Me.colFullName.MinWidth = 45
         Me.colFullName.Name = "colFullName"
+        Me.colFullName.OptionsColumn.AllowEdit = False
+        Me.colFullName.OptionsColumn.ReadOnly = True
         Me.colFullName.Visible = True
         Me.colFullName.VisibleIndex = 1
-        Me.colFullName.Width = 168
+        Me.colFullName.Width = 142
         '
         'colPersonalNumber
         '
+        Me.colPersonalNumber.AppearanceCell.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.colPersonalNumber.AppearanceCell.Options.UseFont = True
         Me.colPersonalNumber.Caption = "პირ. ნომერი"
         Me.colPersonalNumber.FieldName = "PersonalNumber"
         Me.colPersonalNumber.MinWidth = 45
         Me.colPersonalNumber.Name = "colPersonalNumber"
+        Me.colPersonalNumber.OptionsColumn.AllowEdit = False
+        Me.colPersonalNumber.OptionsColumn.ReadOnly = True
         Me.colPersonalNumber.Visible = True
         Me.colPersonalNumber.VisibleIndex = 2
-        Me.colPersonalNumber.Width = 168
+        Me.colPersonalNumber.Width = 142
         '
         'colEmail
         '
+        Me.colEmail.AppearanceCell.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.colEmail.AppearanceCell.Options.UseFont = True
         Me.colEmail.Caption = "ელ. ფოსტა"
         Me.colEmail.FieldName = "Email"
         Me.colEmail.MinWidth = 45
         Me.colEmail.Name = "colEmail"
+        Me.colEmail.OptionsColumn.AllowEdit = False
+        Me.colEmail.OptionsColumn.ReadOnly = True
         Me.colEmail.Visible = True
         Me.colEmail.VisibleIndex = 3
-        Me.colEmail.Width = 168
+        Me.colEmail.Width = 142
         '
         'colPhone
         '
+        Me.colPhone.AppearanceCell.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.colPhone.AppearanceCell.Options.UseFont = True
         Me.colPhone.Caption = "მობ. ნომერი"
         Me.colPhone.FieldName = "Phone"
         Me.colPhone.MinWidth = 45
         Me.colPhone.Name = "colPhone"
+        Me.colPhone.OptionsColumn.AllowEdit = False
+        Me.colPhone.OptionsColumn.ReadOnly = True
         Me.colPhone.Visible = True
         Me.colPhone.VisibleIndex = 4
-        Me.colPhone.Width = 168
+        Me.colPhone.Width = 142
         '
         'colGender
         '
+        Me.colGender.AppearanceCell.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.colGender.AppearanceCell.Options.UseFont = True
         Me.colGender.Caption = "სქესი"
         Me.colGender.FieldName = "Gender"
         Me.colGender.MinWidth = 45
         Me.colGender.Name = "colGender"
+        Me.colGender.OptionsColumn.AllowEdit = False
+        Me.colGender.OptionsColumn.ReadOnly = True
         Me.colGender.Visible = True
         Me.colGender.VisibleIndex = 5
-        Me.colGender.Width = 168
+        Me.colGender.Width = 142
         '
         'colDob
         '
+        Me.colDob.AppearanceCell.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.colDob.AppearanceCell.Options.UseFont = True
         Me.colDob.Caption = "დაბ. თარიღი"
         Me.colDob.DisplayFormat.FormatString = "dd.MM.yyyy"
         Me.colDob.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.colDob.FieldName = "Dob"
         Me.colDob.MinWidth = 45
         Me.colDob.Name = "colDob"
+        Me.colDob.OptionsColumn.AllowEdit = False
+        Me.colDob.OptionsColumn.ReadOnly = True
         Me.colDob.Visible = True
         Me.colDob.VisibleIndex = 6
-        Me.colDob.Width = 168
+        Me.colDob.Width = 142
         '
         'colAddress
         '
+        Me.colAddress.AppearanceCell.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.colAddress.AppearanceCell.Options.UseFont = True
         Me.colAddress.Caption = "მისამართი"
         Me.colAddress.ColumnEdit = Me.RepositoryItemMemoEdit1
         Me.colAddress.FieldName = "Address"
         Me.colAddress.MinWidth = 45
         Me.colAddress.Name = "colAddress"
+        Me.colAddress.OptionsColumn.AllowEdit = False
+        Me.colAddress.OptionsColumn.ReadOnly = True
         Me.colAddress.Visible = True
         Me.colAddress.VisibleIndex = 7
-        Me.colAddress.Width = 168
+        Me.colAddress.Width = 142
         '
         'RepositoryItemMemoEdit1
         '
         Me.RepositoryItemMemoEdit1.Name = "RepositoryItemMemoEdit1"
         '
+        'colInsurance
+        '
+        Me.colInsurance.AppearanceCell.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.colInsurance.AppearanceCell.Options.UseFont = True
+        Me.colInsurance.Caption = "დაზღვევა"
+        Me.colInsurance.FieldName = "InsuranceName"
+        Me.colInsurance.MinWidth = 30
+        Me.colInsurance.Name = "colInsurance"
+        Me.colInsurance.OptionsColumn.AllowEdit = False
+        Me.colInsurance.OptionsColumn.ReadOnly = True
+        Me.colInsurance.Visible = True
+        Me.colInsurance.VisibleIndex = 8
+        Me.colInsurance.Width = 140
+        '
         'colIsActive
         '
+        Me.colIsActive.AppearanceCell.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.colIsActive.AppearanceCell.Options.UseFont = True
         Me.colIsActive.Caption = "სტატუსი"
+        Me.colIsActive.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom
         Me.colIsActive.FieldName = "IsActive"
         Me.colIsActive.MinWidth = 45
         Me.colIsActive.Name = "colIsActive"
+        Me.colIsActive.OptionsColumn.AllowEdit = False
+        Me.colIsActive.OptionsColumn.ReadOnly = True
+        Me.colIsActive.UnboundDataType = GetType(Boolean)
+        Me.colIsActive.UnboundExpression = "[IsDelete]==False"
         Me.colIsActive.Visible = True
-        Me.colIsActive.VisibleIndex = 8
-        Me.colIsActive.Width = 168
+        Me.colIsActive.VisibleIndex = 9
+        Me.colIsActive.Width = 104
+        '
+        'colAddressAndEmail
+        '
+        Me.colAddressAndEmail.AppearanceCell.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.colAddressAndEmail.AppearanceCell.Options.UseFont = True
+        Me.colAddressAndEmail.Caption = "მისამართი და ელ. ფოსტა"
+        Me.colAddressAndEmail.ColumnEdit = Me.RepositoryItemMemoEdit2
+        Me.colAddressAndEmail.FieldName = "AddressAndEmail"
+        Me.colAddressAndEmail.MinWidth = 30
+        Me.colAddressAndEmail.Name = "colAddressAndEmail"
+        Me.colAddressAndEmail.OptionsColumn.AllowEdit = False
+        Me.colAddressAndEmail.OptionsColumn.ReadOnly = True
+        Me.colAddressAndEmail.Visible = True
+        Me.colAddressAndEmail.VisibleIndex = 10
+        Me.colAddressAndEmail.Width = 112
+        '
+        'RepositoryItemMemoEdit2
+        '
+        Me.RepositoryItemMemoEdit2.Name = "RepositoryItemMemoEdit2"
         '
         'tsMenu
         '
-        Me.tsMenu.ImageScalingSize = New System.Drawing.Size(36, 36)
+        Me.tsMenu.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.tsMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsBtnAdd, Me.tsBtnEdit, Me.tsBtnDelete, Me.tsBtnPanelToggle, Me.tsBtnExport, Me.tsBtnDetailExport, Me.tsBtnTop50})
         Me.tsMenu.Location = New System.Drawing.Point(0, 0)
         Me.tsMenu.Name = "tsMenu"
         Me.tsMenu.Padding = New System.Windows.Forms.Padding(0, 0, 3, 0)
-        Me.tsMenu.Size = New System.Drawing.Size(1392, 45)
+        Me.tsMenu.Size = New System.Drawing.Size(1416, 41)
         Me.tsMenu.TabIndex = 2
         Me.tsMenu.Text = "ToolStrip1"
         '
@@ -259,7 +335,7 @@ Partial Class frmPatients
         Me.tsBtnAdd.Image = Global.patients_crud_app.My.Resources.Resources.add
         Me.tsBtnAdd.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsBtnAdd.Name = "tsBtnAdd"
-        Me.tsBtnAdd.Size = New System.Drawing.Size(140, 40)
+        Me.tsBtnAdd.Size = New System.Drawing.Size(136, 36)
         Me.tsBtnAdd.Text = "დამატება"
         '
         'tsBtnEdit
@@ -268,7 +344,7 @@ Partial Class frmPatients
         Me.tsBtnEdit.Image = Global.patients_crud_app.My.Resources.Resources.edit
         Me.tsBtnEdit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsBtnEdit.Name = "tsBtnEdit"
-        Me.tsBtnEdit.Size = New System.Drawing.Size(178, 40)
+        Me.tsBtnEdit.Size = New System.Drawing.Size(174, 36)
         Me.tsBtnEdit.Text = "რედაქტირება"
         '
         'tsBtnDelete
@@ -277,7 +353,7 @@ Partial Class frmPatients
         Me.tsBtnDelete.Image = Global.patients_crud_app.My.Resources.Resources.delete
         Me.tsBtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsBtnDelete.Name = "tsBtnDelete"
-        Me.tsBtnDelete.Size = New System.Drawing.Size(109, 40)
+        Me.tsBtnDelete.Size = New System.Drawing.Size(105, 36)
         Me.tsBtnDelete.Text = "წაშლა"
         '
         'tsBtnPanelToggle
@@ -286,7 +362,7 @@ Partial Class frmPatients
         Me.tsBtnPanelToggle.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsBtnPanelToggle.Name = "tsBtnPanelToggle"
         Me.tsBtnPanelToggle.RightToLeftAutoMirrorImage = True
-        Me.tsBtnPanelToggle.Size = New System.Drawing.Size(103, 40)
+        Me.tsBtnPanelToggle.Size = New System.Drawing.Size(99, 36)
         Me.tsBtnPanelToggle.Text = "ძიება"
         '
         'tsBtnExport
@@ -295,8 +371,8 @@ Partial Class frmPatients
         Me.tsBtnExport.Image = Global.patients_crud_app.My.Resources.Resources.print
         Me.tsBtnExport.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsBtnExport.Name = "tsBtnExport"
-        Me.tsBtnExport.Size = New System.Drawing.Size(118, 40)
-        Me.tsBtnExport.Text = "ბეჭდვა"
+        Me.tsBtnExport.Size = New System.Drawing.Size(207, 36)
+        Me.tsBtnExport.Text = "ცხრილში ბეჭდვა"
         '
         'tsBtnDetailExport
         '
@@ -304,8 +380,8 @@ Partial Class frmPatients
         Me.tsBtnDetailExport.Image = Global.patients_crud_app.My.Resources.Resources.print
         Me.tsBtnDetailExport.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsBtnDetailExport.Name = "tsBtnDetailExport"
-        Me.tsBtnDetailExport.Size = New System.Drawing.Size(232, 40)
-        Me.tsBtnDetailExport.Text = "დეტალური ბეჭდვა"
+        Me.tsBtnDetailExport.Size = New System.Drawing.Size(216, 36)
+        Me.tsBtnDetailExport.Text = "პაციენტის ბეჭდვა"
         '
         'tsBtnTop50
         '
@@ -313,7 +389,7 @@ Partial Class frmPatients
         Me.tsBtnTop50.Image = Global.patients_crud_app.My.Resources.Resources.top_50
         Me.tsBtnTop50.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsBtnTop50.Name = "tsBtnTop50"
-        Me.tsBtnTop50.Size = New System.Drawing.Size(40, 40)
+        Me.tsBtnTop50.Size = New System.Drawing.Size(36, 36)
         Me.tsBtnTop50.Text = "TOP 50"
         '
         'EmptySpaceItem1
@@ -339,9 +415,9 @@ Partial Class frmPatients
         Me.pnlSearch.Controls.Add(Me.txtPatientID)
         Me.pnlSearch.Controls.Add(Me.lbID)
         Me.pnlSearch.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlSearch.Location = New System.Drawing.Point(0, 45)
+        Me.pnlSearch.Location = New System.Drawing.Point(0, 41)
         Me.pnlSearch.Name = "pnlSearch"
-        Me.pnlSearch.Size = New System.Drawing.Size(1392, 93)
+        Me.pnlSearch.Size = New System.Drawing.Size(1416, 93)
         Me.pnlSearch.TabIndex = 4
         '
         'btnClear
@@ -382,6 +458,7 @@ Partial Class frmPatients
         'cbPatientStatus
         '
         Me.cbPatientStatus.FormattingEnabled = True
+        Me.cbPatientStatus.Items.AddRange(New Object() {"აქტიური", "პასიური", "ყველა"})
         Me.cbPatientStatus.Location = New System.Drawing.Point(828, 8)
         Me.cbPatientStatus.Name = "cbPatientStatus"
         Me.cbPatientStatus.Size = New System.Drawing.Size(140, 34)
@@ -459,7 +536,7 @@ Partial Class frmPatients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 26.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1392, 640)
+        Me.ClientSize = New System.Drawing.Size(1416, 650)
         Me.Controls.Add(Me.gcPatients)
         Me.Controls.Add(Me.pnlSearch)
         Me.Controls.Add(Me.tsMenu)
@@ -471,6 +548,7 @@ Partial Class frmPatients
         CType(Me.gcPatients, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gvPatients, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemMemoEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tsMenu.ResumeLayout(False)
         Me.tsMenu.PerformLayout()
         CType(Me.EmptySpaceItem1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -514,4 +592,7 @@ Partial Class frmPatients
     Friend WithEvents tsBtnExport As ToolStripButton
     Friend WithEvents tsBtnPanelToggle As ToolStripButton
     Friend WithEvents tsBtnTop50 As ToolStripButton
+    Friend WithEvents colInsurance As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colAddressAndEmail As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemMemoEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
 End Class
